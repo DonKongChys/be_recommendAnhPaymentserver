@@ -23,3 +23,11 @@ def get_combined_recommendations(user_id, products, transactions):
     
     recommendations.difference_update(user_items)
     return list(recommendations)[:40]
+
+
+
+
+
+
+
+
