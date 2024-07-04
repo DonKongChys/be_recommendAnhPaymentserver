@@ -12,8 +12,8 @@ def create_payment_request(order_id, amount):
     orderInfo = "pay with MoMo"
     partnerCode = "MOMO"
     redirectUrl = "tshop://"
-    ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b"
-    requestId = str(uuid.uuid4())
+    ipnUrl = "http://192.168.0.102:5000/tshop/momo_ipn"
+    requestId = "tshop"
     extraData = ""  # pass empty value or Encode base64 JsonString
     partnerName = "MoMo Payment"
     requestType = "captureWallet"
@@ -29,6 +29,8 @@ def create_payment_request(order_id, amount):
     rawSignature = f"accessKey={accessKey}&amount={amount}&extraData={extraData}&ipnUrl={ipnUrl}&orderId={order_id}" \
                    f"&orderInfo={orderInfo}&partnerCode={partnerCode}&redirectUrl={redirectUrl}" \
                    f"&requestId={requestId}&requestType={requestType}"
+    # print(rawSignature)
+    
 
     # signature
     h = hmac.new(bytes(secretKey, 'ascii'), bytes(rawSignature, 'ascii'), hashlib.sha256)
@@ -56,3 +58,10 @@ def create_payment_request(order_id, amount):
     response = requests.post(endpoint, json=data, headers={'Content-Type': 'application/json'})
 
     return response.json()
+    # response_data = response.json()
+    
+    # # Add the signature to the response data
+    # response_data['signature'] = signature
+
+    # return response_data
+

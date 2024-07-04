@@ -5,8 +5,10 @@ from models.content_based_filtering import get_content_based_recommendations
 from models.collaborative_filtering import get_combined_recommendations
 # from data.load_data import load_products, load_transactions
 from models.content_based_model import ContentBasedModel
+from utils.check_payment_status import check_payment_status
 from utils.data_loader import load_data
 from utils.payment import create_payment_request
+from utils.query_payment import query_payment
 
 app = Flask(__name__)
 
@@ -48,6 +50,34 @@ def pay():
         return jsonify(payment_response)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/queryOrder', methods = ['POST'])
+def checkOrder():
+    data = request.json
+    orderId = data.get('orderId')
+    # amount = data.get('amount')
+    
+    if not orderId :
+        return jsonify({'error': 'Missing orderId'}), 400
+
+    try:
+        response = query_payment(orderId)
+        return jsonify(response)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/tshop/momo_ipn', methods=['POST'])
+def return_status_to_momo():
+    # data = request.json
+    response_body = {
+        "resultCode": 0,
+    }
+    print("Chay do duoc roi ne")
+    response = jsonify(response_body)
+    response.status_code = 204
+    response.headers['Content-Type'] = 'application/json;charset=UTF-8'
+    return response
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
