@@ -12,7 +12,7 @@ def create_payment_request(order_id, amount):
     orderInfo = "pay with MoMo"
     partnerCode = "MOMO"
     redirectUrl = "tshop://"
-    ipnUrl = "http://192.168.0.102:5000/tshop/momo_ipn"
+    ipnUrl = "https://be-recommendanhpaymentserver.onrender.com/tshop/momo_ipn"
     requestId = "tshop"
     extraData = ""  # pass empty value or Encode base64 JsonString
     partnerName = "MoMo Payment"
