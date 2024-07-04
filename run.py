@@ -9,6 +9,7 @@ from utils.check_payment_status import check_payment_status
 from utils.data_loader import load_data
 from utils.payment import create_payment_request
 from utils.query_payment import query_payment
+import time
 
 app = Flask(__name__)
 
@@ -56,6 +57,7 @@ def checkOrder():
     data = request.json
     orderId = data.get('orderId')
     # amount = data.get('amount')
+    print(orderId)
     
     if not orderId :
         return jsonify({'error': 'Missing orderId'}), 400
@@ -76,7 +78,7 @@ def return_status_to_momo():
     response = jsonify(response_body)
     response.status_code = 204
     response.headers['Content-Type'] = 'application/json;charset=UTF-8'
-    time.sleep(20) 
+    time.sleep(10) 
     return response
 
 
