@@ -76,6 +76,7 @@ def return_status_to_momo():
     response = jsonify(response_body)
     response.status_code = 204
     response.headers['Content-Type'] = 'application/json;charset=UTF-8'
+    time.sleep(20) 
     return response
 
 
