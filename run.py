@@ -5,9 +5,8 @@ from models.content_based_filtering import get_content_based_recommendations
 from models.collaborative_filtering import get_combined_recommendations
 # from data.load_data import load_products, load_transactions
 from models.content_based_model import ContentBasedModel
-from utils.check_payment_status import check_payment_status
 from utils.data_loader import load_data
-from utils.payment import create_payment_request
+from utils.payment import create_payment_cc_request, create_payment_request
 from utils.query_payment import query_payment
 import time
 
@@ -80,6 +79,22 @@ def return_status_to_momo():
     response.headers['Content-Type'] = 'application/json;charset=UTF-8'
     time.sleep(10) 
     return response
+
+
+@app.route('/paymentWithCC', methods=['POST'])
+def paymentCC():
+    data = request.json
+    order_id = data.get('orderId')
+    amount = data.get('amount')
+
+    if not order_id or not amount:
+        return jsonify({'error': 'Missing orderId or amount'}), 400
+
+    try:
+        payment_response = create_payment_cc_request(order_id, amount)
+        return jsonify(payment_response)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 if __name__ == '__main__':
