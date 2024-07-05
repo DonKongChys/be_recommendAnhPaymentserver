@@ -13,7 +13,7 @@ def create_payment_request(order_id, amount):
     partnerCode = "MOMO"
     redirectUrl = "tshop://"
     ipnUrl = "https://be-recommendanhpaymentserver.onrender.com/tshop/momo_ipn"
-    requestId = "tshop"
+    requestId = order_id
     extraData = ""  # pass empty value or Encode base64 JsonString
     partnerName = "MoMo Payment"
     requestType = "captureWallet"
@@ -68,7 +68,7 @@ def create_payment_cc_request(order_id, amount):
     partnerCode = "MOMO"
     redirectUrl = "tshop://"
     ipnUrl = "https://be-recommendanhpaymentserver.onrender.com/tshop/momo_ipn"
-    requestId = "tshop"
+    requestId = order_id
     extraData = ""  # pass empty value or Encode base64 JsonString
     partnerName = "MoMo Payment"
     requestType = "payWithCC"

@@ -13,7 +13,7 @@ def query_payment(orderId,):
     partnerCode = "MOMO"
     redirectUrl = "tshop://"
     ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b"
-    requestId = "tshop"
+    requestId = orderId
     extraData = ""  # pass empty value or Encode base64 JsonString
     requestType = "captureWallet"
     lang = "vi"
