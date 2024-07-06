@@ -56,7 +56,7 @@ def checkOrder():
     data = request.json
     orderId = data.get('orderId')
     # amount = data.get('amount')
-    print(orderId)
+    # print(orderId)
     
     if not orderId :
         return jsonify({'error': 'Missing orderId'}), 400
@@ -73,7 +73,7 @@ def return_status_to_momo():
     response_body = {
         "resultCode": 0,
     }
-    print("Chay do duoc roi ne")
+    # print("Chay do duoc roi ne")
     response = jsonify(response_body)
     response.status_code = 204
     response.headers['Content-Type'] = 'application/json;charset=UTF-8'

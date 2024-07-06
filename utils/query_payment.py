@@ -21,7 +21,6 @@ def query_payment(orderId,):
     rawSignature = f"accessKey={accessKey}&orderId={orderId}" \
                    f"&partnerCode={partnerCode}" \
                    f"&requestId={requestId}"
-    print(rawSignature)
 
     # signature
     h = hmac.new(bytes(secretKey, 'ascii'), bytes(rawSignature, 'ascii'), hashlib.sha256)
