@@ -22,7 +22,7 @@ def create_payment_request(order_id, amount):
     autoCapture = True
     lang = "vi"
     orderGroupId = ""
-    orderExpireTime = 0.5
+    orderExpireTime = 1
 
     # before sign HMAC SHA256 with format: accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl
     # &orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId
@@ -79,7 +79,7 @@ def create_payment_cc_request(order_id, amount):
     autoCapture = True
     lang = "vi"
     orderGroupId = ""
-    orderExpireTime = 0.5
+    # orderExpireTime = 60
     
 
     # before sign HMAC SHA256 with format: accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl
@@ -112,7 +112,7 @@ def create_payment_cc_request(order_id, amount):
         'extraData': extraData,
         'signature': signature,
         'orderGroupId': orderGroupId,
-        'orderExpireTime': orderExpireTime
+        # 'orderExpireTime': orderExpireTime
         
     }
 
